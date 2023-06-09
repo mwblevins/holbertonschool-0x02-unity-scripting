@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;
+    private int score = 0;
 
     private Rigidbody playerRigidBody;
     private void Start()
@@ -20,5 +21,12 @@ public class PlayerController : MonoBehaviour
 
         Vector3 movement = new Vector3(moveHorizontal, 0f, moveVertical);
         playerRigidBody.velocity = movement * speed;
+    }
+
+    private void OnTriggerEnter(Collider other) 
+    {
+        score++;
+        Debug.Log("Score: " + score);
+        Destroy(other.gameObject);
     }
 }
