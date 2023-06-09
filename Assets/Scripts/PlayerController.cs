@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;
     private int score = 0;
+    public int health = 5;
 
     private Rigidbody playerRigidBody;
     private void Start()
@@ -25,8 +26,16 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) 
     {
-        score++;
-        Debug.Log("Score: " + score);
-        Destroy(other.gameObject);
+        if (other.CompareTag("Pickup"))
+        {
+            score++;
+            Debug.Log("Score: " + score);
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("Trap"))
+        {
+            health--;
+            Debug.Log("Health: " + health);
+        }
     }
 }
